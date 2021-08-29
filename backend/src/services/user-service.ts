@@ -9,7 +9,7 @@ const register = async (
   if (!username && !password) {
     return createErrorPromise('Username and password are required.');
   }
-  return { id: 1, username: 'Avokado' };
+  return { id: 1, username: username };
 };
 
 export const userService = {
