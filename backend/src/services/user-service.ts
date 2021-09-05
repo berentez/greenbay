@@ -50,6 +50,8 @@ const register = async (
     const hash = await hashPromise().catch(() => {
       throw new Error('something went wrong with hashing');
     });
+
+    ////poolPromise
   }
   // return { id: 1, username: username };
 };
