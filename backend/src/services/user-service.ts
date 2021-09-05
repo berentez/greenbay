@@ -9,6 +9,8 @@ import {
   RegistrationRes,
   UserInfo,
 } from '../models';
+import config from '../config';
+import jwt from 'jsonwebtoken';
 import { createErrorPromise } from './error-service';
 import { checkPassword } from './password-service';
 
@@ -128,8 +130,34 @@ const login = async (request: LoginReq): Promise<LoginRes | ErrorHandling> => {
     });
 
   const result = ((data as DbResult).results as UserInfo[])[0];
-  console.log(result);
-  return { authorization: 'logged in' };
+
+  if (!result) {
+    return createErrorPromise('Username or password is incorrect.');
+  } else {
+    const { id } = result;
+
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, result.password, (err, bcryptResult) => {
+        if (err) {
+          reject(err.message);
+        }
+        if (bcryptResult) {
+          const user = { id: id, username: username };
+          const secret = config.tokenSecrets.access as jwt.Secret;
+          const accessToken = jwt.sign(user, secret);
+          resolve({
+            status: 'ok',
+            authorization: `Bearer ${accessToken}`,
+          });
+        } else {
+          resolve({
+            status: 'error',
+            message: 'Username or password is incorrect.',
+          });
+        }
+      });
+    });
+  }
 };
 
 export const userService = {
