@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt';
-import { db } from '../data/connection';
+import bcrypt from 'bcryptjs';
+import { db, pool } from '../data/connection';
 import {
   DbResult,
   ErrorHandling,
@@ -50,10 +50,61 @@ const register = async (
     const hash = await hashPromise().catch(() => {
       throw new Error('something went wrong with hashing');
     });
+    //posting data to db
+    const poolPromise = (): Promise<RegistrationRes> =>
+      new Promise(resolve => {
+        pool.getConnection((error, connection) => {
+          if (error) {
+            throw new Error(`Database connection error: ${error.message}`);
+          }
 
-    ////poolPromise
+          connection.beginTransaction(error => {
+            if (error) {
+              throw new Error(`Database connection error: ${error.message}`);
+            }
+
+            connection.query(
+              `INSERT INTO user (username, password) VALUES (?, ?)`,
+              [username, hash],
+              error => {
+                if (error) {
+                  return connection.rollback(() => {
+                    throw new Error(`database error: ${error.message}`);
+                  });
+                }
+              }
+            );
+
+            //response
+            connection.query(
+              `SELECT id, username FROM user WHERE username = ?`,
+              [username],
+              (error, result) => {
+                if (error) {
+                  return connection.rollback(() => {
+                    throw new Error(`database error: ${error.message}`);
+                  });
+                }
+                const response: RegistrationRes = result[0] as RegistrationRes;
+
+                connection.commit(error => {
+                  if (error) {
+                    return connection.rollback(() => {
+                      throw new Error(`database error: ${error.message}`);
+                    });
+                  }
+                  resolve(response);
+                });
+              }
+            );
+          });
+          connection.release();
+        });
+      });
+    return await poolPromise().catch(error => {
+      throw new Error(`database error: ${error.message}`);
+    });
   }
-  // return { id: 1, username: username };
 };
 
 export const userService = {
