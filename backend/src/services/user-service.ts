@@ -3,8 +3,11 @@ import { db, pool } from '../data/connection';
 import {
   DbResult,
   ErrorHandling,
+  LoginReq,
+  LoginRes,
   RegistrationReq,
   RegistrationRes,
+  UserInfo,
 } from '../models';
 import { createErrorPromise } from './error-service';
 import { checkPassword } from './password-service';
@@ -107,6 +110,29 @@ const register = async (
   }
 };
 
+const login = async (request: LoginReq): Promise<LoginRes | ErrorHandling> => {
+  const { username, password } = request;
+
+  if (!username && !password) {
+    return createErrorPromise('Username and password are required.');
+  } else if (password && !username) {
+    return createErrorPromise('Username is required.');
+  } else if (username && !password) {
+    return createErrorPromise('Password is required.');
+  }
+
+  const data: DbResult = await db
+    .query(`SELECT * from user WHERE username = ?`, [username])
+    .catch(error => {
+      throw new Error(error.message);
+    });
+
+  const result = ((data as DbResult).results as UserInfo[])[0];
+  console.log(result);
+  return { authorization: 'logged in' };
+};
+
 export const userService = {
   register,
+  login,
 };
