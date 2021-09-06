@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
+import './navbar.scss';
+
 interface NavbarProps {
   authorization: string;
 }
