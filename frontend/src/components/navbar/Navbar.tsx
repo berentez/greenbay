@@ -15,7 +15,7 @@ const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
       {!navbarLoggedIn ? (
         <div className="navbar-links">
           <Link to="/login">Login</Link>
-          <Link to="/register">Registration</Link>
+          <Link to="/register">Sign in</Link>
         </div>
       ) : (
         <div className="navbar-links">

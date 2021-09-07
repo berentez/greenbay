@@ -1,7 +1,10 @@
 @import '../common/colors.scss';
 
 div.navbar-links {
-  background-color: $dark-green-bg;
-  height: 100px;
+  border-bottom: 1px solid $dark-green-bg;
+  height: 4rem;
   width: 100%;
+  a {
+    padding: 10px;
+  }
 }
