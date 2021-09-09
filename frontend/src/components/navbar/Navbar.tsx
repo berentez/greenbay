@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './navbar.scss';
+import Leaf from '../../assets/icons/leaf.svg';
 
 interface NavbarProps {
   authorization: string;
@@ -12,10 +13,17 @@ const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
 
   return (
     <nav className="navbar">
+      <img src={Leaf} alt="leaf" />
       {!navbarLoggedIn ? (
         <div className="navbar-links">
-          <Link to="/login">Login</Link>
-          <Link to="/register">Sign in</Link>
+          <ul>
+            <li>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/register">Sign in</Link>
+            </li>
+          </ul>
         </div>
       ) : (
         <div className="navbar-links">

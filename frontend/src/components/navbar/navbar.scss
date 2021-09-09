@@ -1,10 +1,41 @@
 @import '../common/colors.scss';
 
-div.navbar-links {
-  border-bottom: 1px solid $dark-green-bg;
-  height: 4rem;
-  width: 100%;
-  a {
-    padding: 10px;
+nav.navbar {
+  display: flex;
+  border-bottom: 2px solid $main-green-bg;
+
+  img {
+    height: 3rem;
+    z-index: -10;
+    padding: 0.5rem;
+  }
+
+  div.navbar-links {
+    height: 4rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    ul {
+      display: flex;
+
+      li {
+        list-style-type: none;
+      }
+    }
+
+    a {
+      height: 100%;
+      padding: 1.35rem;
+      color: black;
+      text-decoration: none;
+      font-weight: bolder;
+
+      &:hover {
+        background-color: $main-green-bg;
+        color: white;
+      }
+    }
   }
 }
