@@ -1,0 +1,26 @@
+@import '../colors.scss';
+
+button {
+  margin: 1rem 1rem;
+  padding: 0.5rem;
+  min-width: 7rem;
+  align-self: center;
+  font-size: medium;
+  border: 2px solid grey;
+  border-radius: 5px;
+  background-color: whitesmoke;
+  color: grey;
+
+  &:hover {
+    background-color: $main-green-bg;
+    border: 2px solid $dark-green-bg;
+    border-radius: 5px;
+    color: black;
+  }
+
+  &:focus {
+    background-color: $dark-green-bg;
+    border: 2px solid black;
+    color: white;
+  }
+}

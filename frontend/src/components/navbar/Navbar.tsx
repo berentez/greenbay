@@ -21,7 +21,7 @@ const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
               <Link to="/login">Login</Link>
             </li>
             <li>
-              <Link to="/register">Sign in</Link>
+              <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
         </div>

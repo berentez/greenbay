@@ -1,5 +1,5 @@
 import { FC, ChangeEventHandler } from 'react';
-import './Input.css';
+import './input.scss';
 
 interface InputProps {
   type: string;

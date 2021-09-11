@@ -1,0 +1,20 @@
+@import '../colors.scss';
+
+input {
+  margin: 1rem;
+  padding: 1rem;
+  min-width: 300px;
+  font-size: large;
+  border: none;
+  background-color: $main-green-op;
+  border-radius: 5px;
+  color: white;
+
+  &:focus {
+    background-color: $dark-green-bg;
+
+    &::placeholder {
+      color: white;
+    }
+  }
+}
