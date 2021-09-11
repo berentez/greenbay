@@ -7,6 +7,8 @@ import Button from '../common/button/Button';
 import Input from '../common/input';
 import Title from '../common/title';
 
+import { Alert } from '@material-ui/lab';
+
 import './signup.scss';
 
 interface SignUpProps {}
@@ -65,6 +67,10 @@ const SignUp: React.FC<SignUpProps> = () => {
           <div className="redirection">
             <p>Already has an account?</p>
             <Link to="/login"> Go to login</Link>
+          </div>
+
+          <div className="message">
+            {message && <Alert severity="error">{message}</Alert>}
           </div>
 
           <Button label="Sign Up" />
