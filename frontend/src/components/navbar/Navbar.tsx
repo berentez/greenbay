@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom';
 
 import './navbar.scss';
 import Leaf from '../../assets/icons/leaf.svg';
+import { logoutUser } from '../../store/actions';
 
 interface NavbarProps {
   authorization: string;
+  logoutUser: Function;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
+const Navbar: React.FC<NavbarProps> = ({ authorization, logoutUser }) => {
   const [navbarLoggedIn, setNavbarLoggedIn] = useState(false);
+
+  const handleClick = (): void => {
+    logoutUser();
+  };
 
   useEffect(() => {
     const checkToken = (): void => {
@@ -43,7 +49,9 @@ const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
               <Link to="/stats">Stats</Link>
             </li>
             <li>
-              <Link to="/login">Logout</Link>
+              <Link onClick={handleClick} to="/login">
+                Logout
+              </Link>
             </li>
           </ul>
         </div>
