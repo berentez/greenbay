@@ -1,7 +1,9 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+
 import { LoginResponse, UserData } from '../../../interfaces';
 import { loginService } from '../../../services/login-service';
+
 import Message from '../alert-message';
 import Button from '../button/Button';
 import Input from '../input';
@@ -45,13 +47,12 @@ const Login: React.FC<LoginProps> = ({ saveToken }) => {
     setMessageType(result.type);
 
     if (result.type === 'success') {
-      saveToken({
-        authorization: result.authorization,
-      });
-
       setTimeout(() => {
+        saveToken({
+          authorization: result.authorization,
+        });
         history.push('/books');
-      }, 2000);
+      }, 1000);
     }
   };
 

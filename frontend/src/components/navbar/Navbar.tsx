@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import './navbar.scss';
@@ -10,6 +10,17 @@ interface NavbarProps {
 
 const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
   const [navbarLoggedIn, setNavbarLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const checkToken = (): void => {
+      if (authorization) {
+        setNavbarLoggedIn(true);
+      } else {
+        setNavbarLoggedIn(false);
+      }
+    };
+    checkToken();
+  }, [authorization]);
 
   return (
     <nav className="navbar">
@@ -27,8 +38,14 @@ const Navbar: React.FC<NavbarProps> = ({ authorization }) => {
         </div>
       ) : (
         <div className="navbar-links">
-          <Link to="/stats">My Stats</Link>
-          <Link to="/login">Logout</Link>
+          <ul>
+            <li>
+              <Link to="/stats">Stats</Link>
+            </li>
+            <li>
+              <Link to="/login">Logout</Link>
+            </li>
+          </ul>
         </div>
       )}
     </nav>
