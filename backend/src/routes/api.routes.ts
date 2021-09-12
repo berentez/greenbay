@@ -13,6 +13,6 @@ router.post('/registration', registrationController.post);
 router.post('/login', loginController.post);
 
 router.get('/books', bookController.get);
-router.post('/book', bookController.post);
+router.post('/books', bookController.post);
 
 export default router;
