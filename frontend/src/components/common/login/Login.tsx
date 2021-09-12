@@ -1,15 +1,17 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FormMessage, UserData } from '../../../interfaces';
+import { LoginResponse, UserData } from '../../../interfaces';
 import { loginService } from '../../../services/login-service';
 import Message from '../alert-message';
 import Button from '../button/Button';
 import Input from '../input';
 import Title from '../title';
 
-interface LoginProps {}
+interface LoginProps {
+  saveToken: Function;
+}
 
-const Login: React.FC<LoginProps> = () => {
+const Login: React.FC<LoginProps> = ({ saveToken }) => {
   let history = useHistory();
 
   const [username, setUsername] = useState('');
@@ -38,11 +40,15 @@ const Login: React.FC<LoginProps> = () => {
       user.password = password;
     }
 
-    let result: FormMessage = await loginService(user);
+    let result: LoginResponse = await loginService(user);
     setMessage(result.message);
     setMessageType(result.type);
 
     if (result.type === 'success') {
+      saveToken({
+        authorization: result.authorization,
+      });
+
       setTimeout(() => {
         history.push('/books');
       }, 2000);
