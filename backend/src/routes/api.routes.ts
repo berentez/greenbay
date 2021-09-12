@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 
-import { registrationController } from '../controllers';
+import { bookController, registrationController } from '../controllers';
 import { loginController } from '../controllers/login-controller';
 
 const router = express.Router();
@@ -11,5 +11,8 @@ router.use(express.json());
 
 router.post('/registration', registrationController.post);
 router.post('/login', loginController.post);
+
+router.get('/books', bookController.get);
+router.post('/book', bookController.post);
 
 export default router;

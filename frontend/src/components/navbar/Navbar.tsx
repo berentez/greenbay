@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import './navbar.scss';
 import Leaf from '../../assets/icons/leaf.svg';
-import { logoutUser } from '../../store/actions';
 
 interface NavbarProps {
   authorization: string;
