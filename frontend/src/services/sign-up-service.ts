@@ -11,15 +11,23 @@ const signUpService = async (data: UserData): Promise<FormMessage> => {
       body: JSON.stringify(data),
     });
 
-    console.log('success');
+    const result = await response.json();
 
-    return {
-      message: 'Successful registration!',
-    };
+    if (result.status === 'error') {
+      return {
+        message: result.message,
+        type: 'error',
+      };
+    } else {
+      return {
+        message: 'Successful registration!',
+        type: 'success',
+      };
+    }
   } catch (error: any) {
-    console.log('nope');
     return {
       message: error.message,
+      type: error,
     };
   }
 };
