@@ -1,18 +1,15 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { FormMessage, UserData } from '../../interfaces';
-import { signUpService } from '../../services/sign-up-service';
-import Message from '../common/alert-message';
-import Button from '../common/button/Button';
+import { FormMessage, UserData } from '../../../interfaces';
+import { loginService } from '../../../services/login-service';
+import Message from '../alert-message';
+import Button from '../button/Button';
+import Input from '../input';
+import Title from '../title';
 
-import Input from '../common/input';
-import Title from '../common/title';
+interface LoginProps {}
 
-import './signup.scss';
-
-interface SignUpProps {}
-
-const SignUp: React.FC<SignUpProps> = () => {
+const Login: React.FC<LoginProps> = () => {
   let history = useHistory();
 
   const [username, setUsername] = useState('');
@@ -30,28 +27,24 @@ const SignUp: React.FC<SignUpProps> = () => {
 
   const handleOnSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-
-    let newUser: UserData = { username: '', password: '' };
+    let user: UserData = { username: '', password: '' };
 
     if (username.length === 0 || password.length === 8) {
       setMessage('Username and password are required.');
       setMessageType('error');
       return;
-    } else if (password.length <= 8) {
-      setMessage('Your password should be at least 8 characters.');
-      setMessageType('error');
-      return;
     } else {
-      newUser.username = username;
-      newUser.password = password;
+      user.username = username;
+      user.password = password;
     }
-    let result: FormMessage = await signUpService(newUser);
+
+    let result: FormMessage = await loginService(user);
     setMessage(result.message);
     setMessageType(result.type);
 
     if (result.type === 'success') {
       setTimeout(() => {
-        history.push('/login');
+        history.push('/books');
       }, 2000);
     }
   };
@@ -59,7 +52,7 @@ const SignUp: React.FC<SignUpProps> = () => {
   return (
     <div className="content">
       <div className="formBox">
-        <Title text="Sign Up" />
+        <Title text="Login to greenbook" />
         <form className="form" onSubmit={handleOnSubmit}>
           <Input
             value={username}
@@ -74,10 +67,10 @@ const SignUp: React.FC<SignUpProps> = () => {
             onChange={passwordChange}
           />
           <div className="redirection">
-            <p>Already has an account?</p>
-            <Link to="/login"> Go to Login!</Link>
+            <p>Don't have an account yet?</p>
+            <Link to="/signup"> Sign Up!</Link>
           </div>
-          <Button label="Sign Up" />
+          <Button label="Login" />
           <Message type={messageType} text={message} />
         </form>
       </div>
@@ -85,4 +78,4 @@ const SignUp: React.FC<SignUpProps> = () => {
   );
 };
 
-export default SignUp;
+export default Login;

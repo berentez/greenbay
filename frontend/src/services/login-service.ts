@@ -1,9 +1,9 @@
-import { FormMessage, UserData } from '../interfaces';
 import config from '../config';
+import { LoginResponse, UserData } from '../interfaces';
 
-const signUpService = async (data: UserData): Promise<FormMessage> => {
+const loginService = async (data: UserData): Promise<LoginResponse> => {
   try {
-    const response = await fetch(`${config.url}/api/registration`, {
+    const response = await fetch(`${config.url}/api/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -15,12 +15,13 @@ const signUpService = async (data: UserData): Promise<FormMessage> => {
 
     if (result.status === 'error') {
       return {
-        message: result.message,
+        message: 'Username or password is incorrect.',
         type: 'error',
       };
     } else {
       return {
-        message: 'Successful registration!',
+        authorization: result.authorization,
+        message: `Welcome ${data.username}!`,
         type: 'success',
       };
     }
@@ -32,4 +33,4 @@ const signUpService = async (data: UserData): Promise<FormMessage> => {
   }
 };
 
-export { signUpService };
+export { loginService };
