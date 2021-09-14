@@ -4,6 +4,7 @@ export interface Book {
   title: string;
   page: number;
   color: string;
+  genre: string;
 }
 
 export interface GetDataBaseBook {

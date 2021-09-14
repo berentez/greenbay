@@ -18,9 +18,9 @@ export const bookController = {
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const { author, title, page, color } = req.body;
+    const { author, title, page, color, genre } = req.body;
     const data = await bookService
-      .addBookToDb({ author, title, page, color })
+      .addBookToDb({ author, title, page, color, genre })
       .catch(error => {
         next(new HttpException(500, error));
       });

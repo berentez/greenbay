@@ -1,11 +1,5 @@
 import { db, pool } from '../data/connection';
-import {
-  Book,
-  DbResult,
-  ErrorHandling,
-  GetDataBaseBook,
-  LoginReq,
-} from '../models';
+import { Book, DbResult, ErrorHandling, GetDataBaseBook } from '../models';
 import { createErrorPromise } from './error-service';
 import { pickRandomColor } from './random-color-service';
 
@@ -23,7 +17,7 @@ const getRandomBooks = async (): Promise<GetDataBaseBook | ErrorHandling> => {
 };
 
 const addBookToDb = async (request: Book): Promise<Book | ErrorHandling> => {
-  const { author, title, page } = request;
+  const { author, title, page, genre } = request;
   let { color } = request;
 
   if (!author || !title || !page) {
@@ -60,8 +54,8 @@ const addBookToDb = async (request: Book): Promise<Book | ErrorHandling> => {
           }
 
           connection.query(
-            `INSERT INTO book (author, title, page, color) VALUES (?,?,?,?)`,
-            [author, title, page, color],
+            `INSERT INTO book (author, title, page, color, genre) VALUES (?,?,?,?,?)`,
+            [author, title, page, color, genre],
             error => {
               if (error) {
                 return connection.rollback(() => {
