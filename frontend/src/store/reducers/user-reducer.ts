@@ -1,5 +1,5 @@
 import { AnyAction } from 'redux';
-import { LOGOUT_USER, SAVE_TOKEN } from '../actions/user-actions';
+import { LOGOUT_USER, SAVE_TOKEN } from '../actions';
 
 interface UserState {
   authorization: string;
