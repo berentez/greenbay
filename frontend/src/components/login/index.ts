@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import Login from './Login';
 
-import { saveToken } from '../../../store/actions';
+import { saveToken } from '../../store/actions';
 
 const mapDispatchToProps = (dispatch: Function) => {
   return {

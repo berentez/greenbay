@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 import useFetch from '../../hooks/fetch';
-import { BookData, BookInterface, RequestOptions } from '../../interfaces';
+import { BookData, RequestOptions } from '../../interfaces';
 
 interface BooksProps {
   authorization: string;
+  recommendation: BookData;
   setBookRecommendation: Function;
 }
 
@@ -13,6 +14,7 @@ const requestOptions: RequestOptions = {
 
 const Books: React.FC<BooksProps> = ({
   authorization,
+  recommendation,
   setBookRecommendation,
 }) => {
   const { data } = useFetch<BookData>(authorization, '/books', requestOptions);
@@ -28,7 +30,7 @@ const Books: React.FC<BooksProps> = ({
     mapBooks();
   }, [data, setBookRecommendation]);
 
-  return <p></p>;
+  return <p>Book</p>;
 };
 
 export default Books;

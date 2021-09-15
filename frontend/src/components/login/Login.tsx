@@ -1,13 +1,13 @@
 import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 
-import { LoginResponse, UserData } from '../../../interfaces';
-import { loginService } from '../../../services/login-service';
+import { LoginResponse, UserData } from '../../interfaces';
+import { loginService } from '../../services/login-service';
 
-import Message from '../alert-message';
-import Button from '../button/Button';
-import Input from '../input';
-import Title from '../title';
+import Message from '../common/alert-message';
+import Button from '../common/button/Button';
+import Input from '../common/input';
+import Title from '../common/title';
 
 interface LoginProps {
   saveToken: Function;
@@ -33,10 +33,13 @@ const Login: React.FC<LoginProps> = ({ saveToken }) => {
     event.preventDefault();
     let user: UserData = { username: '', password: '' };
 
-    if (username.length === 0 || password.length === 8) {
+    if (username.length === 0 || password.length === 0) {
       setMessage('Username and password are required.');
       setMessageType('error');
       return;
+    } else if (password.length < 8) {
+      setMessage('Username or password is incorrect.');
+      setMessageType('error');
     } else {
       user.username = username;
       user.password = password;

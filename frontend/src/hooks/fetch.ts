@@ -73,7 +73,7 @@ const useFetch = <Type>(
       active = false;
       //   dispatch(hideLoadingSign(url));
     };
-  }, [url, requestOptions, /*throwError,*/ dispatch]);
+  }, [token, url, requestOptions, /*throwError,*/ dispatch]);
 
   return {
     data,
