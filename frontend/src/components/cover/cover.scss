@@ -1,0 +1,61 @@
+@import '../common/colors.scss';
+
+div.book {
+  height: 270px;
+  width: 180px;
+  padding: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  border-radius: 5px;
+
+  .title {
+    border: 2px solid black;
+    width: 130px;
+    text-align: center;
+    padding: 1rem;
+    font-weight: bold;
+  }
+
+  .author {
+    margin: 0rem;
+    font-weight: bold;
+    color: black;
+  }
+
+  .genre {
+    border-top: 1px solid;
+    position: absolute;
+    bottom: 1rem;
+  }
+}
+.book:hover {
+  -webkit-filter: brightness(60%);
+  filter: brightness(70%);
+  cursor: pointer;
+}
+
+.blue {
+  background-color: $blue;
+}
+
+.green {
+  background-color: $main-green-bg;
+}
+
+.red {
+  background-color: $red;
+}
+
+.orange {
+  background-color: $orange;
+}
+
+.pink {
+  background-color: $pink;
+}
+
+.purple {
+  background-color: $purple;
+}

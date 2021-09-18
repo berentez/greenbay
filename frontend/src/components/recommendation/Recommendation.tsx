@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import { BookInterface } from '../../interfaces';
 import Title from '../common/title';
+import Cover from '../cover/Cover';
+
+import './recommendation.scss';
 
 interface RecomProps {
   recommendation: Array<BookInterface>;
@@ -27,10 +30,12 @@ const Recommendation: React.FC<RecomProps> = ({ recommendation }) => {
   return (
     <div>
       <Title text="Recommendation" />
-      <ul>
+      <ul className="booklist">
         {recommendation.map(value => (
           // console.log(value);
-          <li key={value.id}>{value.title}</li>
+          <li key={value.id}>
+            <Cover book={value} />
+          </li>
         ))}
       </ul>
     </div>
