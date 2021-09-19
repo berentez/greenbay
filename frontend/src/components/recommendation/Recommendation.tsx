@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { BookInterface } from '../../interfaces';
 import Title from '../common/title';
 import Cover from '../cover/Cover';

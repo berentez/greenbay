@@ -1,7 +1,9 @@
-import { useEffect, useState } from 'react';
+import { SyntheticEvent, useEffect } from 'react';
 import useFetch from '../../hooks/fetch';
-import { BookData, BookInterface, RequestOptions } from '../../interfaces';
+import { BookData, RequestOptions } from '../../interfaces';
+import Button from '../common/button/Button';
 import Recommendation from '../recommendation';
+import Searchbar from '../searchbar/Searchbar';
 
 interface BooksProps {
   authorization: string;
@@ -15,18 +17,9 @@ const requestOptions: RequestOptions = {
 
 const Books: React.FC<BooksProps> = ({
   authorization,
-  recommendation,
   setBookRecommendation,
 }) => {
-  const { data } = useFetch<BookData>(authorization, '/books', requestOptions);
-
-  // console.log(data);
-
-  const initialBooksData: BookInterface[] = [
-    { id: 0, author: '', title: '', genre: '', page: 0, color: '' },
-  ];
-
-  const [booksData, setBooksData] = useState([initialBooksData]);
+  let { data } = useFetch<BookData>(authorization, '/books', requestOptions);
 
   useEffect(() => {
     function mapBooks() {
@@ -39,7 +32,12 @@ const Books: React.FC<BooksProps> = ({
     mapBooks();
   }, [data, setBookRecommendation]);
 
-  return <Recommendation />;
+  return (
+    <div>
+      <Searchbar />
+      <Recommendation />
+    </div>
+  );
 };
 
 export default Books;

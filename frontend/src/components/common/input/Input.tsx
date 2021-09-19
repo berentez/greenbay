@@ -5,7 +5,8 @@ interface InputProps {
   type: string;
   placeholder: string;
   value: string;
-  onChange: ChangeEventHandler;
+  onChange?: ChangeEventHandler;
+  list?: string;
 }
 
 const Input: FC<InputProps> = ({ type, placeholder, value, onChange }) => {

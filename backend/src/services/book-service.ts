@@ -5,7 +5,7 @@ import { pickRandomColor } from './random-color-service';
 
 const getRandomBooks = async (): Promise<GetDataBaseBook | ErrorHandling> => {
   const data: DbResult = await db
-    .query(`SELECT * FROM book ORDER BY RAND() LIMIT 10`)
+    .query(`SELECT * FROM book ORDER BY RAND() LIMIT 6`)
     .catch(error => {
       throw new Error(`database error: ${error.message}`);
     });
