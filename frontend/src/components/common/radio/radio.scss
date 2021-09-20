@@ -1,0 +1,21 @@
+@import '../colors.scss';
+
+.radio {
+  height: 4rem;
+  margin: 0;
+  background-color: $main-green-bg;
+  color: white;
+  font-weight: bold;
+  border: none;
+  border-radius: 0;
+  outline: none;
+
+  &:hover {
+    border-radius: 0;
+    border: 1px solid $dark-green-bg;
+  }
+
+  &:focus {
+    border: 1px solid $dark-green-bg;
+  }
+}

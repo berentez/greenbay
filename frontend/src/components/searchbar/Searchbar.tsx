@@ -4,6 +4,8 @@ import Input from '../common/input';
 
 import './searchbar.scss';
 import Search from '../../assets/icons/search.svg';
+import Radio from '../common/radio';
+import Button from '../common/button/Button';
 
 interface SearchbarProps {}
 
@@ -33,17 +35,13 @@ const Searchbar: React.FC<SearchbarProps> = () => {
         placeholder="Search for a book in our library!"
         onChange={searchbarChange}
       />
-      <Input
-        value={list}
-        type="list"
-        placeholder="Search by"
-        onChange={listInputChange}
-        list="search-by"
-      />
-      <datalist id="search-by">
-        <option value="author" />
-        <option value="title" />
-      </datalist>
+      <div className="radio-search">
+        <Radio value="Author" name="search" />
+        <Radio value="Title" name="search" />
+      </div>
+      <span className="ending"></span>
+
+      <Button label="search" />
     </div>
   );
 };
