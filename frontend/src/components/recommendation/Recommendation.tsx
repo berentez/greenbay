@@ -10,10 +10,6 @@ interface RecomProps {
 }
 
 const Recommendation: React.FC<RecomProps> = ({ recommendation }) => {
-  const initialBooksData: any[] = [
-    { author: '', title: '', genre: '', page: 0, color: '' },
-  ];
-
   recommendation as BookInterface[];
 
   // useEffect(() => {
@@ -32,7 +28,6 @@ const Recommendation: React.FC<RecomProps> = ({ recommendation }) => {
       <Title text="Recommendation" />
       <ul className="booklist">
         {recommendation.map(value => (
-          // console.log(value);
           <li key={value.id}>
             <Cover book={value} />
           </li>

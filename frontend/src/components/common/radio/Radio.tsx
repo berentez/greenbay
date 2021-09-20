@@ -1,13 +1,17 @@
+import { MouseEventHandler } from 'react';
 import './radio.scss';
 
 interface RadioProps {
   value: string;
-  name?: string;
-  checked?: boolean;
+  onClick: MouseEventHandler;
 }
 
-const Radio: React.FC<RadioProps> = ({ value, name, checked }) => {
-  return <button className="radio">{value}</button>;
+const Radio: React.FC<RadioProps> = ({ value, onClick }) => {
+  return (
+    <button className="radio" onClick={onClick}>
+      {value}
+    </button>
+  );
 };
 
 export default Radio;

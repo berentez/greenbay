@@ -3,3 +3,4 @@ export * from './form-message';
 export * from './authorization';
 export * from './db-request';
 export * from './book-data';
+export * from './search';

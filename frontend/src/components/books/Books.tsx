@@ -1,7 +1,7 @@
-import { SyntheticEvent, useEffect } from 'react';
+import { useEffect } from 'react';
 import useFetch from '../../hooks/fetch';
 import { BookData, RequestOptions } from '../../interfaces';
-import Button from '../common/button/Button';
+
 import Recommendation from '../recommendation';
 import Searchbar from '../searchbar/Searchbar';
 
