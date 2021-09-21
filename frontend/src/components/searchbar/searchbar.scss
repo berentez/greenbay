@@ -15,45 +15,15 @@
     }
 
     input[type='text'] {
-      border-radius: 0;
+      border-radius: 0 5px 5px 0;
       min-width: 50%;
       max-height: 2rem;
     }
-    input[type='list'] {
-      border-radius: 0 5px 5px 0;
-      max-height: 2rem;
-      max-width: 5rem;
-      margin: 1rem;
-      background-color: $dark-green-bg;
+
+    button {
+      height: 4rem;
       padding: 1rem;
-      margin-left: 0;
-      border: none;
       font-size: large;
-
-      &::placeholder {
-        color: black;
-        font-size: large;
-      }
-
-      &:focus {
-        outline: none;
-      }
-    }
-
-    .radio-search {
-      display: flex;
-      align-items: center;
-      height: 4rem;
-      margin-top: 1rem;
-      border-radius: 0 5px 5px 0;
-    }
-
-    .ending {
-      min-width: 1.5em;
-      height: 4rem;
-      background-color: $dark-green-bg;
-      margin-top: 1rem;
-      border-radius: 0 50% 50% 0;
     }
   }
 }

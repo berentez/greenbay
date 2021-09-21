@@ -57,12 +57,7 @@ const Searchbar: React.FC<SearchbarProps> = () => {
           placeholder="Search for a book in our library!"
           onChange={searchbarChange}
         />
-        <div className="radio-search">
-          <Radio value="Author" onClick={handleAuthor} />
-          <Radio value="Title" onClick={handleTitle} />
-        </div>
-
-        <span className="ending"></span>
+        {/* <span className="ending"></span> */}
 
         <Button label="search" />
         <Message type={messageType} text={message} />
