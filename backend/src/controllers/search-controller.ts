@@ -4,12 +4,12 @@ import { ErrorHandling, SearchReq } from '../models';
 import { searchService } from '../services/search-service';
 
 export const searchController = {
-  async get(
+  async post(
     req: Request<unknown, unknown, SearchReq, unknown>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
-    const data = await searchService.getBook(req.body).catch(error => {
+    const data = await searchService.searchBook(req.body).catch(error => {
       next(new HttpException(500, error));
     });
 

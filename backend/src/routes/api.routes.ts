@@ -17,7 +17,7 @@ router.post('/registration', registrationController.post);
 router.post('/login', loginController.post);
 
 router.use(authenticateToken);
-router.get('/search', searchController.get);
+router.post('/search', searchController.post);
 router.get('/books', bookController.get);
 router.post('/books', bookController.post);
 

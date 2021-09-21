@@ -3,15 +3,18 @@ import Input from '../common/input';
 
 import './searchbar.scss';
 import Search from '../../assets/icons/search.svg';
-import Radio from '../common/radio';
 import Button from '../common/button/Button';
 import Message from '../common/alert-message';
 
-interface SearchbarProps {}
+import { SearchRequest } from '../../interfaces';
+import { searchService } from '../../services/search-service';
 
-const Searchbar: React.FC<SearchbarProps> = () => {
+interface SearchbarProps {
+  authorization: string;
+}
+
+const Searchbar: React.FC<SearchbarProps> = ({ authorization }) => {
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('title');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
 
@@ -19,32 +22,22 @@ const Searchbar: React.FC<SearchbarProps> = () => {
     setSearch(event.target.value);
   };
 
-  const handleTitle = () => {
-    setCategory('title');
-  };
-
-  const handleAuthor = () => {
-    setCategory('author');
-  };
-
   const handleOnSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
+    let request: SearchRequest = { search: '' };
+
     if (search.length === 0) {
-      setMessage(`Write something to searchbar.`);
+      setMessage(`Write something to the searchbar.`);
       setMessageType('info');
       return;
     } else {
-      if (category === 'title') {
-        let bookSearch = {
-          title: search,
-        };
-      } else {
-        let bookSearch = {
-          author: search,
-        };
-      }
-      ///////////////////////////////////
+      setMessageType('');
+
+      request.search = search;
     }
+
+    const result = searchService(authorization, request);
   };
 
   return (
@@ -57,7 +50,6 @@ const Searchbar: React.FC<SearchbarProps> = () => {
           placeholder="Search for a book in our library!"
           onChange={searchbarChange}
         />
-        {/* <span className="ending"></span> */}
 
         <Button label="search" />
         <Message type={messageType} text={message} />

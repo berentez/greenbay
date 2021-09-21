@@ -3,7 +3,7 @@ import useFetch from '../../hooks/fetch';
 import { BookData, RequestOptions } from '../../interfaces';
 
 import Recommendation from '../recommendation';
-import Searchbar from '../searchbar/Searchbar';
+import Searchbar from '../searchbar';
 
 interface BooksProps {
   authorization: string;

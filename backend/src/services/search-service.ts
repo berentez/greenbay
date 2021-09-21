@@ -1,15 +1,14 @@
-import { resolve } from 'path/posix';
 import { db } from '../data/connection';
-import { Book, DbResult, ErrorHandling, SearchReq, SearchRes } from '../models';
+import { DbResult, ErrorHandling, SearchReq, SearchRes } from '../models';
 import { createErrorPromise } from './error-service';
 
-const getBook = async (
+const searchBook = async (
   request: SearchReq
 ): Promise<SearchRes | ErrorHandling> => {
   const { search } = request;
 
   if (!search) {
-    return createErrorPromise('No input for a search in the database.');
+    return createErrorPromise('Nothing to search with');
   }
   const data: DbResult = await db
     .query(`SELECT * from book WHERE title LIKE ? OR author LIKE ?`, [
@@ -30,5 +29,5 @@ const getBook = async (
 };
 
 export const searchService = {
-  getBook,
+  searchBook,
 };
