@@ -5,6 +5,7 @@ export interface BookInterface {
   genre: string;
   page: number;
   color: string;
+  status?: string;
 }
 
 export interface BookData {

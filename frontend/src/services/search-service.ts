@@ -1,12 +1,10 @@
 import config from '../config';
-import { SearchError, SearchRequest, SearchResponse } from '../interfaces';
+import { BookInterface, SearchError, SearchRequest } from '../interfaces';
 
 const searchService = async (
   authorization: string,
   data: SearchRequest
-): Promise<SearchResponse | SearchError> => {
-  console.log(JSON.stringify(data));
-
+): Promise<BookInterface | SearchError> => {
   try {
     const response = await fetch(`${config.url}/api/search`, {
       method: 'POST',
@@ -18,7 +16,14 @@ const searchService = async (
       body: JSON.stringify(data),
     });
 
-    let result: SearchResponse = await response.json();
+    let result: BookInterface = await response.json();
+
+    if (result.status === 'error') {
+      return {
+        message: 'Something went wrong',
+        status: 'error',
+      };
+    }
 
     return result;
   } catch (error: any) {

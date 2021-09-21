@@ -5,6 +5,7 @@ export interface SearchResponse {
   page: number;
   color: string;
   genre: string;
+  status?: string;
 }
 
 export interface SearchError {

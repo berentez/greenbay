@@ -6,14 +6,18 @@ import Search from '../../assets/icons/search.svg';
 import Button from '../common/button/Button';
 import Message from '../common/alert-message';
 
-import { SearchRequest } from '../../interfaces';
+import { BookInterface, SearchError, SearchRequest } from '../../interfaces';
 import { searchService } from '../../services/search-service';
 
 interface SearchbarProps {
   authorization: string;
+  setSearchedBook: Function;
 }
 
-const Searchbar: React.FC<SearchbarProps> = ({ authorization }) => {
+const Searchbar: React.FC<SearchbarProps> = ({
+  authorization,
+  setSearchedBook,
+}) => {
   const [search, setSearch] = useState('');
   const [message, setMessage] = useState('');
   const [messageType, setMessageType] = useState('');
@@ -37,7 +41,12 @@ const Searchbar: React.FC<SearchbarProps> = ({ authorization }) => {
       request.search = search;
     }
 
-    const result = searchService(authorization, request);
+    const result: Promise<BookInterface | SearchError> = searchService(
+      authorization,
+      request
+    );
+    console.log(result);
+    setSearchedBook(result);
   };
 
   return (
