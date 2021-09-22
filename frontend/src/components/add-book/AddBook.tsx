@@ -71,7 +71,7 @@ const AddBook: React.FC<AddBookProps> = ({ authorization }) => {
 
       if (result.message && result.type) {
         setMessage(result.message);
-        setMessage(result.type);
+        setMessageType(result.type);
       } else {
         setTimeout(() => {
           history.push('/books');
