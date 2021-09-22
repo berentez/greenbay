@@ -1,0 +1,44 @@
+@import '../common/colors.scss';
+
+.wrapper {
+  background-color: white;
+  min-height: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .main {
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+  }
+
+  .book {
+    min-height: 400px;
+    min-width: 250px;
+  }
+
+  .add {
+    display: flex;
+    flex-direction: column;
+  }
+
+  select {
+    margin: 1rem 0;
+    padding: 1rem;
+    min-width: 300px;
+    font-size: large;
+    border: none;
+    background-color: $main-green-op;
+    border-radius: 5px;
+    color: white;
+
+    &:focus {
+      background-color: $dark-green-bg;
+
+      &::placeholder {
+        color: white;
+      }
+    }
+  }
+}

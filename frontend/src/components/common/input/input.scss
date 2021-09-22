@@ -1,7 +1,8 @@
 @import '../colors.scss';
 
 input[type='text'],
-input[type='password'] {
+input[type='password'],
+input[type='number'] {
   margin: 1rem 0;
   padding: 1rem;
   min-width: 300px;

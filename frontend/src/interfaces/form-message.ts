@@ -1,6 +1,7 @@
 export interface FormMessage {
   message: string;
   type: string;
+  id?: number;
 }
 
 export interface LoginResponse {

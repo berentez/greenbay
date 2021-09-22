@@ -1,8 +1,8 @@
-import { BookInterface } from '../../interfaces';
+import { NewBook } from '../../interfaces';
 import './cover.scss';
 
 interface CoverProps {
-  book: BookInterface;
+  book: NewBook;
 }
 
 const Cover: React.FC<CoverProps> = ({ book }) => {
