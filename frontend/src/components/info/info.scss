@@ -1,0 +1,47 @@
+@import '../common/colors.scss';
+
+.info-wrapper {
+  min-width: 70%;
+  height: 40rem;
+  background-color: rgba(211, 211, 211);
+  border-radius: 5px;
+  margin: 0 15%;
+  display: flex;
+  justify-content: center;
+
+  .redirect {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  span {
+    font-size: x-large;
+  }
+
+  a {
+    margin: 1em 0.2em;
+    text-decoration: none;
+    color: $dark-green-bg;
+    font-size: x-large;
+
+    &:visited {
+      color: $dark-green-bg;
+    }
+  }
+
+  .book-info {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    div.book {
+      height: 30rem;
+      width: 20rem;
+      p {
+        font-size: x-large;
+      }
+    }
+  }
+}

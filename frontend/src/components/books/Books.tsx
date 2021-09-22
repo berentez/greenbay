@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import useFetch from '../../hooks/fetch';
 import { BookData, RequestOptions } from '../../interfaces';
+import Info from '../info';
 
 import Recommendation from '../recommendation';
 import Searchbar from '../searchbar';
@@ -35,6 +36,7 @@ const Books: React.FC<BooksProps> = ({
   return (
     <div>
       <Searchbar />
+      <Info />
       <Recommendation />
     </div>
   );
