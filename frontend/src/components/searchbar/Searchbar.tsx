@@ -29,7 +29,7 @@ const Searchbar: React.FC<SearchbarProps> = ({
   const handleOnSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
 
-    let request: SearchRequest = { search: '' };
+    let request: SearchRequest = { search: search };
 
     if (search.length === 0) {
       setMessage(`Write something to the searchbar.`);
@@ -41,11 +41,11 @@ const Searchbar: React.FC<SearchbarProps> = ({
       request.search = search;
     }
 
-    const result: Promise<BookInterface | SearchError> = searchService(
+    const result: BookInterface | SearchError = await searchService(
       authorization,
       request
     );
-    console.log(result);
+
     setSearchedBook(result);
   };
 

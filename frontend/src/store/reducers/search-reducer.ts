@@ -18,7 +18,7 @@ export const searchReducer = (
 ) => {
   switch (action.type) {
     case SET_SEARCH:
-      return (state = action.payload);
+      return action.payload;
     default:
       return state;
   }

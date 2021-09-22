@@ -16,18 +16,17 @@ const searchService = async (
       body: JSON.stringify(data),
     });
 
-    let result: BookInterface = await response.json();
-
-    if (result.status === 'error') {
+    if ([401, 403].includes(response.status)) {
       return {
-        message: 'Something went wrong',
         status: 'error',
+        message: response.status === 401 ? 'unauthorized' : 'forbidden',
       };
+    } else {
+      let result: BookInterface = await response.json();
+      return result as BookInterface;
     }
-
-    return result;
-  } catch (error: any) {
-    return error.message;
+  } catch {
+    return { status: 'error', message: 'internal server error' };
   }
 };
 
