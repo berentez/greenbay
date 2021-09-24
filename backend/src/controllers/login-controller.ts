@@ -5,7 +5,7 @@ import { userService } from '../services';
 
 export const loginController = {
   async post(
-    req: Request<LoginReq>,
+    req: Request<unknown, unknown, LoginReq>,
     res: Response,
     next: NextFunction
   ): Promise<void> {
