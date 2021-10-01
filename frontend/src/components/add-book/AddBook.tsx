@@ -5,7 +5,7 @@ import { addBookService } from '../../services/add-book-service';
 import Message from '../common/alert-message';
 import Button from '../common/button/Button';
 import Input from '../common/input';
-import Cover from '../cover/Cover';
+import Cover from '../cover';
 
 import './add-book.scss';
 

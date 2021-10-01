@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { BookInterface } from '../../interfaces';
-import Cover from '../cover/Cover';
+import Cover from '../cover';
 import './info.scss';
 
 interface InfoProps {

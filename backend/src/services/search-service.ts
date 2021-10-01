@@ -5,7 +5,8 @@ import { createErrorPromise } from './error-service';
 const searchBook = async (
   request: SearchReq
 ): Promise<SearchRes | ErrorHandling> => {
-  const { search } = request;
+  let { search } = request;
+  search = `%${search}%`;
 
   if (!search) {
     return createErrorPromise('Nothing to search with');
