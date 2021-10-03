@@ -45,6 +45,9 @@ const Navbar: React.FC<NavbarProps> = ({ authorization, logoutUser }) => {
         <div className="navbar-links">
           <ul>
             <li>
+              <Link to="/books">Library</Link>
+            </li>
+            <li>
               <Link to="/bookshelf">Bookshelf</Link>
             </li>
             <li>

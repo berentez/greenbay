@@ -25,6 +25,10 @@
   .add {
     display: flex;
     flex-direction: column;
+
+    input[type='text'] {
+      padding: 1.18;
+    }
   }
 
   select {
