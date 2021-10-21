@@ -43,6 +43,7 @@
 
     &:focus {
       background-color: $dark-green-bg;
+      border-radius: 5px 5px 0 0;
 
       &::placeholder {
         color: white;

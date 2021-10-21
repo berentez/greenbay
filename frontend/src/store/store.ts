@@ -1,4 +1,6 @@
 import { createStore, compose } from 'redux';
+import { persistStore } from 'redux-persist';
+
 import rootReducer from './rootReducer';
 
 declare global {
@@ -11,4 +13,6 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(rootReducer, composeEnhancers());
 
-export default store;
+const persistor = persistStore(store);
+
+export default { store, persistor };

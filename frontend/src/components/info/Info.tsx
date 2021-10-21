@@ -1,5 +1,8 @@
+import { ChangeEvent, SyntheticEvent, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { BookInterface } from '../../interfaces';
+import Button from '../common/button/Button';
+import Input from '../common/input/Input';
 import Cover from '../cover';
 import './info.scss';
 
@@ -8,7 +11,19 @@ interface InfoProps {
 }
 
 const Info: React.FC<InfoProps> = ({ search }) => {
-  console.log(search);
+  const [year, setYear] = useState(new Date().getFullYear());
+
+  const increaseYear = () => setYear(year + 1);
+  const decreaseYear = () => setYear(year - 1);
+
+  const handleOnSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+  };
+
+  const yearChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setYear(parseInt(event.target.value));
+  };
+
   return (
     <div className="info-wrapper">
       {!search.id ? (
@@ -22,6 +37,18 @@ const Info: React.FC<InfoProps> = ({ search }) => {
           <div className="more-info">
             <h3>Pages: {search.page}</h3>
             <h3>About the book:</h3>
+            <form className={'bookshelf'} onSubmit={handleOnSubmit}>
+              <p>When did you finish this book?</p>
+              <Button label={'-'} onClick={decreaseYear} />
+              <Input
+                value={year.toString()}
+                type="number"
+                placeholder="year"
+                onChange={yearChange}
+              />
+              <Button label={'+'} onClick={increaseYear} />
+              <Button label={'Add to Bookhself'} />
+            </form>
           </div>
         </div>
       )}
