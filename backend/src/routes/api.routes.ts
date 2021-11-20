@@ -22,5 +22,6 @@ router.post('/search', searchController.post);
 router.get('/books', bookController.get);
 router.post('/books', bookController.post);
 router.post('/reading', readingController.post);
+router.put('/reading', readingController.put);
 
 export default router;

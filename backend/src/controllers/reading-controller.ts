@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '../exceptions/http-exception';
-import { ErrorHandling, Reading } from '../models';
+import { ChangeReadingStatus, ErrorHandling, Reading } from '../models';
 import { readingService } from '../services/reading-service';
 
 export const readingController = {
@@ -15,6 +15,23 @@ export const readingController = {
         next(new HttpException(500, error));
       });
 
+    if (((data as unknown) as ErrorHandling).status === 'error') {
+      res.status(400).json(data);
+    } else {
+      res.status(200).json(data);
+    }
+  },
+
+  async put(
+    req: Request<unknown, unknown, ChangeReadingStatus, unknown>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const data = await readingService
+      .updateBookStatus(req.body, req.headers)
+      .catch(error => {
+        next(new HttpException(500, error));
+      });
     if (((data as unknown) as ErrorHandling).status === 'error') {
       res.status(400).json(data);
     } else {

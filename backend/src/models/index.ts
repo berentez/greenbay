@@ -6,6 +6,7 @@ export * from './dto/book';
 export * from './dto/search';
 export * from './dto/reading';
 export * from './dto/userId';
+export * from './dto/readingStatus';
 
 //data
 export * from './data/db-result';
