@@ -5,7 +5,7 @@ import config from '../config';
 import HttpException from '../exceptions/http-exception';
 
 interface tokenInterface {
-  id: string;
+  id: number;
   username: string;
 }
 

@@ -3,6 +3,7 @@ import cors from 'cors';
 import {
   bookController,
   loginController,
+  readingController,
   registrationController,
   searchController,
 } from '../controllers';
@@ -20,5 +21,6 @@ router.use(authenticateToken);
 router.post('/search', searchController.post);
 router.get('/books', bookController.get);
 router.post('/books', bookController.post);
+router.post('/reading', readingController.post);
 
 export default router;
