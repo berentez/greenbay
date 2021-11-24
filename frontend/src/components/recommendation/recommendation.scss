@@ -1,8 +1,14 @@
 .booklist {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
   justify-content: space-between;
-  padding: 0 10%;
+
+  @media screen and (max-width: 1300px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @media screen and (max-width: 800px) {
+    grid-template-columns: 1fr 1fr;
+  }
 
   li {
     list-style: none;
