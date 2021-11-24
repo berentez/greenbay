@@ -4,6 +4,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import AddBook from './components/add-book';
 import Books from './components/books';
+import Bookshelf from './components/bookshelf/Bookshelf';
 import Login from './components/login';
 import Navbar from './components/navbar';
 import SignUp from './components/signup';
@@ -29,6 +30,9 @@ const App: React.FC = () => {
               </Route>
               <Route exact path="/addBook">
                 <AddBook />
+              </Route>
+              <Route exact path="/bookshelf">
+                <Bookshelf />
               </Route>
             </Switch>
           </div>
