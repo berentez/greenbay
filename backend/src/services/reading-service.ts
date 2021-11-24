@@ -6,6 +6,7 @@ import {
   Reading,
   ReadingResponse,
   UserId,
+  DeleteReadingRequest,
 } from '../models';
 import { createErrorPromise } from './error-service';
 
@@ -98,7 +99,29 @@ const updateBookStatus = async (
   }
 };
 
+const deleteBookFromShelf = async (
+  request: DeleteReadingRequest,
+  headers: UserId
+): Promise<ReadingResponse | ErrorHandling> => {
+  const { id } = request;
+  const userId = headers.id;
+
+  if (!userId || !id) {
+    return createErrorPromise('Crucial data missing');
+  }
+
+  await db
+    .query(`DELETE from reading WHERE id = ? AND userId = ?`, [id, userId])
+    .catch(error => {
+      throw new Error(`database error: ${error.message}`);
+    });
+  return {
+    message: `Succesful deletion!`,
+  };
+};
+
 export const readingService = {
   addBookToShelf,
   updateBookStatus,
+  deleteBookFromShelf,
 };
