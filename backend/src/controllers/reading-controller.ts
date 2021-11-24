@@ -1,6 +1,11 @@
 import { Request, Response, NextFunction } from 'express';
 import HttpException from '../exceptions/http-exception';
-import { ChangeReadingStatus, ErrorHandling, Reading } from '../models';
+import {
+  ChangeReadingStatus,
+  DeleteReadingRequest,
+  ErrorHandling,
+  Reading,
+} from '../models';
 import { readingService } from '../services/reading-service';
 
 export const readingController = {
@@ -36,6 +41,24 @@ export const readingController = {
       res.status(400).json(data);
     } else {
       res.status(200).json(data);
+    }
+  },
+
+  async delete(
+    req: Request<unknown, unknown, DeleteReadingRequest, unknown>,
+    res: Response,
+    next: NextFunction
+  ): Promise<void> {
+    const data = await readingService
+      .deleteBookFromShelf(req.body, req.headers)
+      .catch(error => {
+        next(new HttpException(500, error));
+      });
+
+    if ((data as ErrorHandling).status === 'error') {
+      res.status(400).json(data);
+    } else {
+      res.status(202).json(data);
     }
   },
 };

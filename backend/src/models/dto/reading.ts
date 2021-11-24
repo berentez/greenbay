@@ -9,3 +9,8 @@ export interface Reading {
 export interface ReadingResponse {
   message: string;
 }
+
+export interface DeleteReadingRequest {
+  id: number;
+  userId: number;
+}
