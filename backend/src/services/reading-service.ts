@@ -1,4 +1,3 @@
-import { request } from 'http';
 import { db } from '../data/connection';
 import {
   ChangeReadingStatus,
@@ -21,7 +20,7 @@ const addBookToShelf = async (
   if (!userId || !bookId || !status) {
     return createErrorPromise('Crucial data missing');
   }
-  if (status === 'read') {
+  if (status === 'finished') {
     await db
       .query(
         `INSERT INTO reading (userid, bookid, status, rating) VALUES (?, ?, ?, ?)`,
@@ -63,7 +62,7 @@ const updateBookStatus = async (
 
   const readingData: DbResult = await db
     .query(
-      `SELECT * FROM reading WHERE userid = ? AND bookid = ? AND status = "current" OR status = "wants to read"`,
+      `SELECT * FROM reading WHERE userid = ? AND bookid = ? AND status = "current" OR status = "want to read"`,
       [userId, bookId]
     )
     .catch(error => {
@@ -83,12 +82,12 @@ const updateBookStatus = async (
         .catch(error => {
           throw new Error(`database error: ${error.message}`);
         });
-    } else if (status === 'read') {
+    } else if (status === 'finished') {
       await db
-        .query(`UPDATE reading SET status = "read", rating = ? WHERE id = ?`, [
-          rating,
-          reading.id,
-        ])
+        .query(
+          `UPDATE reading SET status = "finished", rating = ? WHERE id = ?`,
+          [rating, reading.id]
+        )
         .catch(error => {
           throw new Error(`database error: ${error.message}`);
         });
