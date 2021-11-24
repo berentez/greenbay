@@ -20,6 +20,8 @@ const Info: React.FC<InfoProps> = ({ search }) => {
     event.preventDefault();
   };
 
+  const addingBook = async () => {};
+
   const yearChange = (event: ChangeEvent<HTMLInputElement>) => {
     setYear(parseInt(event.target.value));
   };
@@ -47,7 +49,7 @@ const Info: React.FC<InfoProps> = ({ search }) => {
                 onChange={yearChange}
               />
               <Button label={'+'} onClick={increaseYear} />
-              <Button label={'Add to Bookhself'} />
+              <Button label={'Add to Bookhself'} onClick={addingBook} />
             </form>
           </div>
         </div>
