@@ -4,5 +4,5 @@ export * from './authorization';
 export * from './db-request';
 export * from './book-data';
 export * from './search';
-export * from './new-reading';
+export * from './add-reading';
 export * from './response-message';

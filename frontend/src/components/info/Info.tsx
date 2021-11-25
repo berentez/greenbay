@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { BookInterface } from '../../interfaces';
 import Button from '../common/button/Button';
 import Input from '../common/input/Input';
+import { StarRating } from '../common/star-rating/StarRating';
 import Cover from '../cover';
 import './info.scss';
 
@@ -49,6 +50,7 @@ const Info: React.FC<InfoProps> = ({ search }) => {
                 onChange={yearChange}
               />
               <Button label={'+'} onClick={increaseYear} />
+              <StarRating />
               <Button label={'Add to Bookhself'} onClick={addingBook} />
             </form>
           </div>

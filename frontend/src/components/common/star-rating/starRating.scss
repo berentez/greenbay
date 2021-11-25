@@ -1,0 +1,25 @@
+@import '../colors.scss';
+
+button.star {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: x-large;
+  min-width: 1rem;
+  margin: 0;
+
+  &:focus {
+    color: $orange;
+  }
+
+  &:hover {
+    color: $main-green-bg;
+  }
+}
+.on {
+  color: $orange;
+}
+.off {
+  color: #ccc;
+}
