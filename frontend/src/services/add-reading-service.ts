@@ -14,13 +14,16 @@ const addReadingService = async (
       },
       body: JSON.stringify(data),
     });
-
-    ///////
-    //////////
-    ////////////
-    return {
-      message: 'ok',
-    };
+    if (response.status === 400) {
+      return {
+        type: 'error',
+        message: `Can't add this book to your bookshelf`,
+      };
+    } else {
+      return {
+        message: 'Book added to your bookshelf',
+      };
+    }
   } catch {
     return {
       type: 'error',
