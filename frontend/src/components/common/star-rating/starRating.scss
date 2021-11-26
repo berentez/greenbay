@@ -1,25 +1,34 @@
 @import '../colors.scss';
 
-button.star {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: x-large;
-  min-width: 1rem;
-  margin: 0;
+.star-rating {
+  h4 {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    padding: 8px;
+  }
 
-  &:focus {
+  button.star {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: x-large;
+    min-width: 1rem;
+    margin: 0;
+    padding: 0.05rem;
+
+    &:focus {
+      color: $orange;
+    }
+
+    &:hover {
+      color: tomato;
+    }
+  }
+  .on {
     color: $orange;
   }
-
-  &:hover {
-    color: tomato;
+  .off {
+    color: #ccc;
   }
-}
-.on {
-  color: $orange;
-}
-.off {
-  color: #ccc;
 }

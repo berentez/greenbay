@@ -14,7 +14,13 @@ interface InfoProps {
 const Info: React.FC<InfoProps> = ({ search }) => {
   const [year, setYear] = useState(new Date().getFullYear());
 
-  const increaseYear = () => setYear(year + 1);
+  const increaseYear = () => {
+    let date = new Date();
+    if (year < date.getFullYear()) {
+      setYear(year + 1);
+    }
+  };
+
   const decreaseYear = () => setYear(year - 1);
 
   const handleOnSubmit = async (event: SyntheticEvent) => {
@@ -22,8 +28,10 @@ const Info: React.FC<InfoProps> = ({ search }) => {
   };
 
   const addingBook = async () => {};
+  const addingCurrent = async () => {};
 
   const yearChange = (event: ChangeEvent<HTMLInputElement>) => {
+    let date = new Date();
     setYear(parseInt(event.target.value));
   };
 
@@ -39,19 +47,21 @@ const Info: React.FC<InfoProps> = ({ search }) => {
           <Cover book={search} />
           <div className="more-info">
             <h3>Pages: {search.page}</h3>
-            <h3>About the book:</h3>
             <form className={'bookshelf'} onSubmit={handleOnSubmit}>
               <p>When did you finish this book?</p>
-              <Button label={'-'} onClick={decreaseYear} />
+              <Button className="operator" label={'-'} onClick={decreaseYear} />
               <Input
                 value={year.toString()}
                 type="number"
                 placeholder="year"
                 onChange={yearChange}
               />
-              <Button label={'+'} onClick={increaseYear} />
-              <StarRating />
+              <Button className="operator" label={'+'} onClick={increaseYear} />
+              <br />
               <Button label={'Add to Bookhself'} onClick={addingBook} />
+              <StarRating />
+              <Button label={'Currently reading'} onClick={addingCurrent} />
+              <Button label={'Want to read'} onClick={addingCurrent} />
             </form>
           </div>
         </div>

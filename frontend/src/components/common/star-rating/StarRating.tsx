@@ -10,6 +10,7 @@ export const StarRating = (props: StarRatingProps) => {
   const [rating, setRating] = useState(0);
   return (
     <div className="star-rating">
+      <h4>Rate this book:</h4>
       {[...Array(10)].map((star, i) => {
         // return <FontAwesomeIcon icon={faStar} />;
         i += 1;
