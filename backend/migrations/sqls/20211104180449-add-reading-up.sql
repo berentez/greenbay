@@ -4,6 +4,8 @@ CREATE TABLE `greenbook`.`reading` (
   `bookid` INT NOT NULL,
   `status` VARCHAR(45) NOT NULL,
   `rating` INT NULL,
+  `start` DATE DEFAULT NULL,
+  `finish` DATE DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `idreading_UNIQUE` (`id` ASC) VISIBLE,
   INDEX `userid_idx` (`userid` ASC) VISIBLE,

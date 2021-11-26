@@ -14,7 +14,7 @@ const addBookToShelf = async (
   request: Reading,
   headers: UserId
 ): Promise<ReadingResponse | ErrorHandling> => {
-  const { bookId, status, rating } = request;
+  const { bookId, status, rating, finish } = request;
 
   const userId = headers.id;
 
@@ -22,10 +22,11 @@ const addBookToShelf = async (
     return createErrorPromise('Crucial data missing');
   }
   if (status === 'finished') {
+    const finishDate: string = `${finish}-12-31`;
     await db
       .query(
-        `INSERT INTO reading (userid, bookid, status, rating) VALUES (?, ?, ?, ?)`,
-        [userId, bookId, status, rating]
+        `INSERT INTO reading (userid, bookid, status, rating, finish) VALUES (?, ?, ?, ?, ?)`,
+        [userId, bookId, status, rating, finishDate]
       )
       .catch(error => {
         throw new Error(`database error: ${error.message}`);
@@ -34,7 +35,20 @@ const addBookToShelf = async (
     return {
       message: 'Book added to database',
     };
-  } else {
+  } else if (status === 'current') {
+    const date = new Date();
+    await db
+      .query(
+        `INSERT INTO reading (userid, bookid, status, start) VALUES (?, ?, ?, ?)`,
+        [userId, bookId, status, date]
+      )
+      .catch(error => {
+        throw new Error(`database error: ${error.message}`);
+      });
+    return {
+      message: 'Book added to database',
+    };
+  } else if (status === 'want to read') {
     await db
       .query(`INSERT INTO reading (userid, bookid, status) VALUES (?, ?, ?)`, [
         userId,
@@ -47,6 +61,8 @@ const addBookToShelf = async (
     return {
       message: 'Book added to database',
     };
+  } else {
+    return createErrorPromise('Crucial data missing');
   }
 };
 
