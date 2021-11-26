@@ -4,7 +4,6 @@ export interface Reading {
   bookId: number;
   status: string;
   rating?: number;
-  start?: Date;
   finish?: Date;
 }
 
