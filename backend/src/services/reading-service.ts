@@ -92,18 +92,22 @@ const updateBookStatus = async (
     return createErrorPromise(`Reading not found!`);
   } else {
     if (status === 'current') {
+      const date = new Date();
+
       await db
-        .query(`UPDATE reading SET status = "current" WHERE id = ?`, [
-          reading.id,
-        ])
+        .query(
+          `UPDATE reading SET status = "current", start = ? WHERE id = ?`,
+          [date, reading.id]
+        )
         .catch(error => {
           throw new Error(`database error: ${error.message}`);
         });
     } else if (status === 'finished') {
+      const date = new Date();
       await db
         .query(
-          `UPDATE reading SET status = "finished", rating = ? WHERE id = ?`,
-          [rating, reading.id]
+          `UPDATE reading SET status = "finished", rating = ?, finish = ? WHERE id = ?`,
+          [rating, date, reading.id]
         )
         .catch(error => {
           throw new Error(`database error: ${error.message}`);
