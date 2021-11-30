@@ -21,6 +21,7 @@ const addReadingService = async (
       };
     } else {
       return {
+        type: 'success',
         message: 'Book added to your bookshelf',
       };
     }
@@ -31,3 +32,5 @@ const addReadingService = async (
     };
   }
 };
+
+export { addReadingService };
